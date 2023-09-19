@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-7I/C5HZwXYGdnRjPuUaqMl6zJ2dSVt8A3Lz6XW5Oz5Cf+P5gVyR2TNir9h2ERmr5i7QvMU0YG7MW9HrVv2j9eQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>TOILET LOCATOR</title>
+<style>
+    body {
+        font-family: 'Arial, sans-serif';
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .container {
+        max-width: 400px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        flex: 1;
+    }
+    .title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #007BFF;
+    }
+    .input-group {
+        margin-bottom: 1rem;
+    }
+    .input-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+    .input-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    .input-group input:focus {
+        border-color: #007BFF;
+        outline: none;
+    }
+    .btn {
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    .message {
+        margin-top: 1rem;
+        font-weight: bold;
+        white-space: pre-line;
+        color: #333;
+    }
+    .footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #fff;
+        font-size: 0.85rem;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">TOILET LOCATOR</h1>
+    <div class="input-group">
+        <label for="pinCodeInput">Enter your pin code: </label>
+        <input type="text" id="pinCodeInput" pattern="\d{6}" maxlength="6">
+    </div>
+    <button class="btn" onclick="showToiletLocations()">Search <i class="fas fa-search"></i></button>
+    <p class="message" id="message"></p>
+</div>
+<div class="footer">
+    Created by MUHILAN R
+</div>
+
+<script>
+function showToiletLocations() {
+    const pinCodeInput = document.getElementById('pinCodeInput');
+    const pinCode = pinCodeInput.value;
+    
+    if(!pinCode.match(/^\d{6}$/)) {
+        document.getElementById('message').textContent = "Please enter a valid 6-digit pin code.";
+        return;
+    }
+
+    const toiletLocations = {
+        "636401": ["Toilet 1: Central Park", "Toilet 2: Metro Station"],
+        "636402": ["Toilet 1: Community Center", "Toilet 2: Shopping Mall"],
+        "636403": ["Toilet 1: Museum", "Toilet 2: University"],
+        "636404": ["Toilet 1: Bus stand", "Toilet 2: Gate 6"],
+        "636405": ["Toilet 1: KEC", "Toilet 2: Every hostel"],
+        "636406": ["Toilet 1: Museum", "Toilet 2: University"],
+        "636407": ["Toilet 1: Hospital", "Toilet 2: every floor"],
+    };
+
+    let message;
+    if(toiletLocations[pinCode]) {
+        message = "Toilet locations in your area:\n" + toiletLocations[pinCode].join("\n");
+    } else {
+        message = "No toilet locations available for this pin code.";
+    }
+
+    document.getElementById('message').textContent = message;
+}
+</script>
+</body>
+</html>
